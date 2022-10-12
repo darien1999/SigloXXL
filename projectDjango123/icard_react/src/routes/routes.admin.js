@@ -8,6 +8,7 @@ const routesAdmin = [
     component: HomeAdmin,
     exact: true,
   },
+
   {
     path: "/admin/users",
     layout: AdminLayout,

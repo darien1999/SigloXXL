@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../../hoooks";
 import "./SideMenu.scss";
 
 export function SideMenu(props) {
@@ -17,6 +18,7 @@ export function SideMenu(props) {
 }
 function MenuLeft(props) {
   const { pathname } = props;
+  const { auth } = useAuth();
   return (
     <Menu fixed="left" borderless className="slide" vertical>
       {/* Pedidos */}
@@ -65,13 +67,15 @@ function MenuLeft(props) {
 
       {/* Usuarios */}
 
-      <Menu.Item
-        as={Link}
-        to={"/admin/users"}
-        active={pathname === "/admin/users"}
-      >
-        <Icon name="user" /> Usuarios
-      </Menu.Item>
+      {auth.me?.if_staff && (
+        <Menu.Item
+          as={Link}
+          to={"/admin/users"}
+          active={pathname === "/admin/users"}
+        >
+          <Icon name="user" /> Usuarios
+        </Menu.Item>
+      )}
     </Menu>
   );
 }
