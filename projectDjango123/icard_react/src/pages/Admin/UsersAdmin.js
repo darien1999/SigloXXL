@@ -15,13 +15,13 @@ export function UsersAdmin() {
    
     return (
       <>
-        <HeaderPage title="Usuarios" />
+        <HeaderPage title="Usuarios" btnTitle="Nuevo Usuario"/>
         {loading ? (
           <Loader active inline="centered">
             Cargando...
           </Loader>
         ) : (
-          <h1> Tabla de usuarios</h1>
+          <TableUsers users={users} />
         )}
       </>
     );
