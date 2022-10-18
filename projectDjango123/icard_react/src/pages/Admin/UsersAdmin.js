@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import  { Loader } from "semantic-ui-react";
+import { HeaderPage, TableUsers } from "../../components/Admin"
+import { useUser } from "../../hoooks"
 
 export function UsersAdmin() {
-  return (
-    <div>
-      <h1>Estamos en Users Admin</h1>
-    </div>
-  );
+  const { loading, users, getUsers } = useUser();
+  console.log('loading ->', loading);
+  console.log('loading ->', users);
+  useEffect(() => {
+    getUsers();
+  }, [])
+  
+   
+   
+    return (
+      <>
+        <HeaderPage title="Usuarios" />
+        {loading ? (
+          <Loader active inline="centered">
+            Cargando...
+          </Loader>
+        ) : (
+          <h1> Tabla de usuarios</h1>
+        )}
+      </>
+    );
+
+
+
 }

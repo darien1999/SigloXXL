@@ -67,7 +67,7 @@ function MenuLeft(props) {
 
       {/* Usuarios */}
 
-      {auth.me?.if_staff && (
+       {auth.me?.is_staff && ( 
         <Menu.Item
           as={Link}
           to={"/admin/users"}
@@ -75,7 +75,8 @@ function MenuLeft(props) {
         >
           <Icon name="user" /> Usuarios
         </Menu.Item>
-      )}
+       )}
+    
     </Menu>
   );
 }
