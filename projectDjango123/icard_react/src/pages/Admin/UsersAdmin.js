@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import  { Loader } from "semantic-ui-react";
-import { HeaderPage, TableUsers, AddEditUserForm } from "../../components/Admin";
-import {ModalBasic} from '../../components/Common';
+import { Loader } from "semantic-ui-react";
+import {
+  HeaderPage,
+  TableUsers,
+  AddEditUserForm,
+} from "../../components/Admin";
+import { ModalBasic } from "../../components/Common";
 import { useUser } from "../../hoooks";
 
 export function UsersAdmin() {
-
-
-  const [showModal, setShowModal] = useState(false)
-  const [titleModal, setTitleModal] = useState(null)
-  const [contentModal, setContentModal] = useState(null)
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState(null);
+  const [contentModal, setContentModal] = useState(null);
   const { loading, users, getUsers } = useUser();
-
 
   console.log(users);
 
@@ -19,36 +20,35 @@ export function UsersAdmin() {
     getUsers();
   }, []);
 
-  const openCloseModal = () => setShowModal((prev) => !prev)
+  const openCloseModal = () => setShowModal((prev) => !prev);
 
   const addUser = () => {
     setTitleModal("Nuevo usuario");
-    setContentModal(<AddEditUserForm />);
+    setContentModal(<AddEditUserForm onClose={openCloseModal} />);
     openCloseModal();
-  }
-   
-   
-    return (
-      <>
-        <HeaderPage title="Usuarios" 
-        btnTitle="Nuevo Usuario" 
+  };
+
+  return (
+    <>
+      <HeaderPage
+        title="Usuarios"
+        btnTitle="Nuevo Usuario"
         btnClick={addUser}
-        />
-        {loading ? (
-          <Loader active inline="centered">
-            Cargando...
-          </Loader>
-        ) : (
-          <TableUsers users={users} />
-        )}
+      />
+      {loading ? (
+        <Loader active inline="centered">
+          Cargando...
+        </Loader>
+      ) : (
+        <TableUsers users={users} />
+      )}
 
-        <ModalBasic show={showModal} 
+      <ModalBasic
+        show={showModal}
         onClose={openCloseModal}
-        title= {titleModal} 
-        children={contentModal} />
-      </>
-    );
-
-
-
+        title={titleModal}
+        children={contentModal}
+      />
+    </>
+  );
 }
