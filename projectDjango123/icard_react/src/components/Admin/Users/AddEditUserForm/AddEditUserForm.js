@@ -2,16 +2,23 @@ import React from 'react'
 import { Form, Button, Checkbox } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import {  useUser } from "../../../../hoooks";
 import "./AddEditUserForm.scss";
 
 export function AddEditUserForm() {
+      const { addUser } = useUser();
     const formik = useFormik({
       initialValues:  initialValues(),
-      validationSchema: Yup.object(newSchame),
+      validationSchema: Yup.object(validationSchema()),
       validateOnChange: false,
-      onSubmit: (formValue) => {
-          console.log("Formulario enviado")
-          console.log(formValue)
+      onSubmit: async (formValue) => {
+          try {
+                await addUser(formValue);
+                console.log ('Usuario creado correctamente')
+          } catch (error) {
+              console.error(error)
+            
+          }
       }
     })
   return (
@@ -57,10 +64,22 @@ export function AddEditUserForm() {
         />
 
         <div className="add-edit-user-form__active">
-          <Checkbox toggle /> Usuario activo
+          <Checkbox 
+          toggle checked={formik.values.is_active} 
+          onChange={(_, data) => formik.setFieldValue('is_active', data.checked)
+          
+            } 
+          /> 
+          Usuario activo
         </div>
         <div className="add-edit-user-form__staff">
-          <Checkbox toggle /> Usuario administrador
+          <Checkbox 
+          toggle checked={formik.values.is_staff} 
+          onChange={(_, data) => formik.setFieldValue('is_staff', data.checked) 
+
+          }
+/>
+           Usuario administrador
         </div>
 
         <Button type="submit" primary fluid content="Crear" />
@@ -79,11 +98,11 @@ function initialValues() {
     is_staff: false,
   };
 }
-function newSchame() {
+function validationSchema() {
   return {
     username: Yup.string().required(true),
     email: Yup.string().email(true).required(true),
-    firts_name: Yup.string(),
+    first_name: Yup.string(),
     last_name: Yup.string(),
     password: Yup.string().required(true),
     is_active: Yup.bool().required(true),
