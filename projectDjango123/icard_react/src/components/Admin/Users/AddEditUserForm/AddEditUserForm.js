@@ -5,16 +5,21 @@ import * as Yup from "yup";
 import {  useUser } from "../../../../hoooks";
 import "./AddEditUserForm.scss";
 
-export function AddEditUserForm() {
-      const { addUser } = useUser();
+export function AddEditUserForm(props) {
+      const { onClose, onRefetch, user } = props;
+      const { addUser, updateUser } = useUser();
     const formik = useFormik({
-      initialValues:  initialValues(),
-      validationSchema: Yup.object(validationSchema()),
+      initialValues:  initialValues(user),
+      validationSchame: Yup.object(user ? updateSchame() : validationSchame()),
       validateOnChange: false,
       onSubmit: async (formValue) => {
           try {
-                await addUser(formValue);
-                console.log ('Usuario creado correctamente')
+                  if(user) await updateUser(user.id, formValue);
+                  
+                else await addUser(formValue);
+
+                onRefetch()
+                onClose();
           } catch (error) {
               console.error(error)
             
@@ -82,23 +87,23 @@ export function AddEditUserForm() {
            Usuario administrador
         </div>
 
-        <Button type="submit" primary fluid content="Crear" />
+        <Button type="submit" primary fluid content={user ? "Actualizar" : "Crear"} />
     </Form>
   )
 }
 
-function initialValues() {
+function initialValues(data) {
   return {
-    username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
+    username: data?.username || "",
+    email: data?.email || "",
+    first_name: data?.first_name || "",
+    last_name: data?.last_name || "",
     password: "",
-    is_active: true,
-    is_staff: false,
+    is_active: data?.is_active ? true : false,
+    is_staff: data?.is_staff ? true : false,
   };
 }
-function validationSchema() {
+function validationSchame() {
   return {
     username: Yup.string().required(true),
     email: Yup.string().email(true).required(true),
@@ -109,3 +114,16 @@ function validationSchema() {
     is_staff: Yup.bool().required(true)
   };
 }
+
+function updateSchame() {
+  return {
+    username: Yup.string().required(true),
+    email: Yup.string().email(true).required(true),
+    first_name: Yup.string(),
+    last_name: Yup.string(),
+    password: Yup.string(),
+    is_active: Yup.bool().required(true),
+    is_staff: Yup.bool().required(true)
+  };
+}
+
