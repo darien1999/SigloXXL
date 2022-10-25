@@ -7,17 +7,19 @@ import { useCategory } from "../../../../hoooks";
 import "./AddEditCategoryForm.scss";
 
 export function AddEditCategoryForm(props) {
-  const { onClose, onRefetch } = props;
-  const [previewImage, setPreviewImage] = useState(null);
-  const { addCategory } = useCategory();
+  const { onClose, onRefetch, category } = props;
+  const [previewImage, setPreviewImage] = useState(category?.image || null);
+  const { addCategory, updateCategory } = useCategory();
 
   const formik = useFormik({
-    initialValues: initialValues(),
-    validationSchema: Yup.object(newSchema()),
+    initialValues: initialValues(category),
+    validationSchema: Yup.object(category ? updateSchema() : newSchema()),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        await addCategory(formValue);
+        if (category) await updateCategory(category.id, formValue);
+        else await addCategory(formValue);
+
         onRefetch();
         onClose();
       } catch (error) {
@@ -55,24 +57,37 @@ export function AddEditCategoryForm(props) {
         color={formik.errors.image && "red"}
         {...getRootProps()}
       >
-        Subir imagen
+        {previewImage ? "Cambiar imagen" : "Subir imagen"}
         <input {...getInputProps()} />
         <Image src={previewImage} fluid />
       </Button>
-      <Button type="submit" primary fluid content="Crear" />
+      <Button
+        type="submit"
+        primary
+        fluid
+        content={category ? "Actualizar" : "Crear"}
+      />
     </Form>
   );
 }
 
-function initialValues() {
+function initialValues(data) {
   return {
-    title: "",
+    title: data?.title || "",
     image: "",
   };
 }
+
 function newSchema() {
   return {
     title: Yup.string().required(true),
     image: Yup.string().required(true),
+  };
+}
+
+function updateSchema() {
+  return {
+    title: Yup.string().required(true),
+    image: Yup.string(),
   };
 }
