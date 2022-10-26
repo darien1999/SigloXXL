@@ -2,18 +2,23 @@ import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useTable } from "../../../../hoooks";
 import "./AddEditTableForm.scss";
 
 export function AddEditTableForm(props) {
-  const { onClose } = props;
+  const { onClose, onRefetch, table } = props;
+  const { addTable, updateTable } = useTable();
 
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(table),
     validationSchema: Yup.object(validationSchema()),
     validateOnChange: false,
-    onSubmit: (formValue) => {
-      console.log("Enviado Formulario");
-      console.log(formValue);
+    onSubmit: async (formValue) => {
+      if (table) await updateTable(table.id, formValue);
+      else await addTable(formValue);
+
+      onRefetch();
+      onClose();
     },
   });
   return (
@@ -27,7 +32,12 @@ export function AddEditTableForm(props) {
         error={formik.errors.number}
       />
 
-      <Button type="submit" primary fluid content="Crear" />
+      <Button
+        type="submit"
+        primary
+        fluid
+        content={table ? "Actualizar" : "Crear"}
+      />
     </Form>
   );
 }
