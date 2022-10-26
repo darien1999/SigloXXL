@@ -15,12 +15,12 @@ export function useProduct() {
     } catch (error) {
       throw error;
     }
+  };
 
-    return {
-      loading,
-      error,
-      products,
-      getProducts,
-    };
+  return {
+    loading,
+    error,
+    products,
+    getProducts,
   };
 }
