@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     'categories',
-    'products'
+    'products',
+    'tables'
 
 ]
 
@@ -87,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'SIGLO13',
-        'PASSWORD': '1234',
+        'USER': 'sigloxxl',
+        'PASSWORD': '123',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
