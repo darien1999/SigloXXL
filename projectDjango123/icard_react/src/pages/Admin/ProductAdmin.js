@@ -13,7 +13,7 @@ export function ProductAdmin() {
   const [titleModal, setTitleModal] = useState(null);
   const [contentModal, setContentModal] = useState(null);
   const [refetch, setRefetch] = useState(false);
-  const { loading, products, getProducts } = useProduct();
+  const { loading, products, getProducts, deleteProduct } = useProduct();
 
   useEffect(() => getProducts(), [refetch]);
 
@@ -42,6 +42,16 @@ export function ProductAdmin() {
     openCloseModal();
   };
 
+  // Eliminar producto
+
+  const onDeleteProduct = async (data) => {
+    const result = window.confirm(`¿Eliminar producto ${data.title}?`);
+    if (result) {
+      await deleteProduct(data.id);
+      onRefetch();
+    }
+  };
+
   return (
     <>
       <HeaderPage
@@ -54,7 +64,11 @@ export function ProductAdmin() {
           Cargando...
         </Loader>
       ) : (
-        <TableProductAdmin products={products} updateProduct={updateProduct} />
+        <TableProductAdmin
+          products={products}
+          updateProduct={updateProduct}
+          deleteProduct={onDeleteProduct}
+        />
       )}
       <ModalBasic
         show={showModal}

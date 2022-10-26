@@ -14,7 +14,7 @@ export function AddEditProductForm(props) {
     product ? product?.image : null
   );
   const { categories, getCategories } = useCategory();
-  const { addProduct } = useProduct();
+  const { addProduct, updateProduct } = useProduct();
 
   useEffect(() => getCategories(), []);
   useEffect(() => {
@@ -26,7 +26,7 @@ export function AddEditProductForm(props) {
     validationSchema: Yup.object(product ? updateSchema() : newSchema()),
     validateOnChange: false,
     onSubmit: async (formValue) => {
-      if (product) console.log("Update...");
+      if (product) await updateProduct(product.id, formValue);
       else await addProduct(formValue);
 
       onRefetch();
