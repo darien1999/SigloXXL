@@ -1,23 +1,20 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  Form,
-  Image,
-  Button,
-  Dropdown,
-  Checkbox,
-  Input,
-} from "semantic-ui-react";
+import { Form, Image, Button, Dropdown, Checkbox } from "semantic-ui-react";
 import { map } from "lodash";
 import { useDropzone } from "react-dropzone";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useCategory } from "../../../../hoooks";
+import { useCategory, useProduct } from "../../../../hoooks";
 import "./AddEditProductForm.scss";
 
-export function AddEditProductForm() {
+export function AddEditProductForm(props) {
+  const { onClose, onRefetch, product } = props;
   const [categoriesFormat, setCategoriesFormat] = useState([]);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(
+    product ? product?.image : null
+  );
   const { categories, getCategories } = useCategory();
+  const { addProduct } = useProduct();
 
   useEffect(() => getCategories(), []);
   useEffect(() => {
@@ -25,10 +22,16 @@ export function AddEditProductForm() {
   }, [categories]);
 
   const formik = useFormik({
-    initialValues: initialValues(),
-    validationSchema: Yup.object(newSchema()),
+    initialValues: initialValues(product),
+    validationSchema: Yup.object(product ? updateSchema() : newSchema()),
     validateOnChange: false,
-    onSubmit: (formValue) => {},
+    onSubmit: async (formValue) => {
+      if (product) console.log("Update...");
+      else await addProduct(formValue);
+
+      onRefetch();
+      onClose();
+    },
   });
 
   const onDrop = useCallback(async (acceptedFile) => {
@@ -92,7 +95,12 @@ export function AddEditProductForm() {
       <input {...getInputProps()} />
       <Image src={previewImage} />
 
-      <Button type="submit" primary fluid content="Crear" />
+      <Button
+        type="submit"
+        primary
+        fluid
+        content={product ? "Actualizar" : "Crear"}
+      />
     </Form>
   );
 }
@@ -107,10 +115,10 @@ function formatDropdownData(data) {
 
 function initialValues(data) {
   return {
-    title: "",
-    price: "",
-    category: "",
-    active: false,
+    title: data?.title || "",
+    price: data?.price || "",
+    category: data?.category || "",
+    active: data?.active ? true : false,
     image: "",
   };
 }
@@ -122,5 +130,15 @@ function newSchema() {
     category: Yup.number().required(true),
     active: Yup.boolean().required(true),
     image: Yup.string().required(true),
+  };
+}
+
+function updateSchema() {
+  return {
+    title: Yup.string().required(true),
+    price: Yup.number().required(true),
+    category: Yup.number().required(true),
+    active: Yup.boolean().required(true),
+    image: Yup.string(),
   };
 }
