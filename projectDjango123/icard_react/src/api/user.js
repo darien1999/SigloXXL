@@ -116,3 +116,9 @@ export async function deleteUserApi(id, token){
     
   }
 }
+
+try {
+  
+} catch (error) {
+  
+}
