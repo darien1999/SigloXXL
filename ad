@@ -1,0 +1,30 @@
+[33mc3fb7f9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Creando app, modelo y CRUD de orden de pedido
+[33m67b282c[m Creando app, modelo y CRUD de orden de pedido
+[33me8e937d[m Creacion  de Editar y Eliminar en Tables
+[33m1393420[m Formulario de Creacion de Mesa E logica
+[33m289032e[m creacion pagina mesa
+[33m7061ae7[m Creando app, modelo y el ModelViewSet de la app tables(Sistema de mesas)
+[33mcf30684[m CRUD terminado de producto
+[33m56adf59[m Formulario para actualizar producto y su logica
+[33m13c6696[m Subida de imagen de productos y Validacion del formulario
+[33m9845abf[m Formulario para crear productos y Dropdown de categorias
+[33ma7c952a[m Obteniendo productos y Creando tabla producto
+[33m5495866[m Pagina de productos
+[33m0620dbc[m Implementando sistema de filtros, Añadiendo informacion de categoria asociada al producto
+[33m9500d87[m Creando app y model de producto y su ModelViewSet
+[33mca946fe[m Terminando CRUD de categorias
+[33mebec7d0[m Creando la categoria
+[33mb1e9cbb[m Formulario crea categorias y Controlando la imagen de la categoria
+[33mc73a080[m Pagina de categorias y Renderizado de tabla de categorias
+[33m16a68c1[m Api Category
+[33mf837e90[m Creando app y el modelo Categorias y el ModewViewSet de categorias
+[33mcced518[m Formulario para editar usuarios, Logica para editar usuario, eliminar usuario y su logica
+[33m16bf455[m Validación del formulario completa y logica para crear los usuarios con el metodo POST
+[33m5c90a51[m Creando un Modal basico con su respectivo formulario, error en la validación
+[33m52f6010[m Creando tabla de usuarios, con sus respectivos iconos y acciones de la tabla
+[33m23d9442[m Obteniendo usuarios usuarios y creando Header Page
+[33m4037fb2[m Aplicando Restricción al Usuario
+[33me2772e4[m Estructura y Logica del Menu SideMenu
+[33ma4c08fb[m Añadiendo Estructura TopMenu
+[33m464fc7c[m implementacion de sistema de login administrador
+[33mc7662b5[m login Administrador
