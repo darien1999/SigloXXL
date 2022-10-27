@@ -1,22 +1,18 @@
 import { AdminLayout } from "../layouts";
 import {
-  HomeAdmin,
   UsersAdmin,
   CategoriesAdmin,
   ProductAdmin,
-<<<<<<< HEAD
-  TablesAdmin
-
-=======
   TablesAdmin,
->>>>>>> e8e937d549a8352ff804c42be4bfbc0405803091
+  OrdersAdmin,
+
 } from "../pages/Admin";
 
 const routesAdmin = [
   {
     path: "/admin",
     layout: AdminLayout,
-    component: HomeAdmin,
+    component: OrdersAdmin,
     exact: true,
   },
 
@@ -44,11 +40,7 @@ const routesAdmin = [
     layout: AdminLayout,
     component: TablesAdmin,
     exact: true,
-<<<<<<< HEAD
   }
-=======
-  },
->>>>>>> e8e937d549a8352ff804c42be4bfbc0405803091
 ];
 
 export default routesAdmin;
