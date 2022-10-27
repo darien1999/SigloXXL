@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'categories',
     'products',
     'tables',
+<<<<<<< HEAD
     'orders'
+=======
+>>>>>>> e8e937d549a8352ff804c42be4bfbc0405803091
 
 ]
 
@@ -89,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'sigloxxl',
-        'PASSWORD': '123',
+        'USER': 'REGISTRO',
+        'PASSWORD': '1234',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',

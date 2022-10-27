@@ -4,8 +4,12 @@ import {
   UsersAdmin,
   CategoriesAdmin,
   ProductAdmin,
+<<<<<<< HEAD
   TablesAdmin
 
+=======
+  TablesAdmin,
+>>>>>>> e8e937d549a8352ff804c42be4bfbc0405803091
 } from "../pages/Admin";
 
 const routesAdmin = [
@@ -40,7 +44,11 @@ const routesAdmin = [
     layout: AdminLayout,
     component: TablesAdmin,
     exact: true,
+<<<<<<< HEAD
   }
+=======
+  },
+>>>>>>> e8e937d549a8352ff804c42be4bfbc0405803091
 ];
 
 export default routesAdmin;
