@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'products',
     'tables',
     'orders'
-    ]
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'sigloxxl',
-        'PASSWORD': '123',
+        'USER': 'siglo13',
+        'PASSWORD': '1234',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
