@@ -7,6 +7,13 @@
     align-items: center;
     justify-content: space-between;
 
+    &.pending {
+        background-color: rgb(255, 220, 155);
+      }
+      &.delivered {
+        background-color: rgb(183, 255, 115);
+      }
+
     &__time {
         position: absolute;
         top: -14px;
