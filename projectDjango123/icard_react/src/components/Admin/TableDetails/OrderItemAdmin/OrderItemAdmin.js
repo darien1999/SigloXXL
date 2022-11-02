@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Image } from "semantic-ui-react";
-import "../OrderItemAdmin";
+import "./OrderItemAdmin.scss";
 
 export function OrderItemAdmin(props) {
   const { order } = props;

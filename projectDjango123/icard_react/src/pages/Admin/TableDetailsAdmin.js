@@ -6,7 +6,7 @@ import { ListOrderAdmin } from "../../components/Admin/TableDetails";
 import { useOrder } from "../../hoooks";
 
 export function TableDetailsAdmin() {
-  const id = useParams();
+  const { id } = useParams();
   const { loading, orders, getOrdersByTable } = useOrder();
 
   useEffect(() => {
