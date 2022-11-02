@@ -4,12 +4,12 @@ import { map } from "lodash";
 import "./TableTablesAdmin.scss";
 
 export function TableTablesAdmin(props) {
-  const { tables } = props;
+  const { tables, updateTable, deleteTable } = props;
   return (
     <Table className="table-tables-admin">
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Mesa Numero</Table.HeaderCell>
+          <Table.HeaderCell>Mesa numero</Table.HeaderCell>
           <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -18,25 +18,26 @@ export function TableTablesAdmin(props) {
         {map(tables, (table, index) => (
           <Table.Row key={index}>
             <Table.Cell>{table.number}</Table.Cell>
-
-            <Actions table={table} />
+            <Actions
+              table={table}
+              updateTable={updateTable}
+              deleteTable={deleteTable}
+            />
           </Table.Row>
         ))}
       </Table.Body>
     </Table>
   );
 }
-
 function Actions(props) {
-  const { tables } = props;
+  const { table, updateTable, deleteTable } = props;
 
   return (
     <Table.Cell textAlign="right">
-      <Button icon onClick={() => console.log("Editar mesa")}>
+      <Button icon onClick={() => updateTable(table)}>
         <Icon name="pencil" />
       </Button>
-
-      <Button icon negative onClick={() => console.log("Eliminar mesa")}>
+      <Button icon negative onClick={() => deleteTable(table)}>
         <Icon name="close" />
       </Button>
     </Table.Cell>
