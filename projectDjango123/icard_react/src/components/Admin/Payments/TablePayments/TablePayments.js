@@ -3,6 +3,7 @@ import { Table, Button, Icon, TableHeader } from "semantic-ui-react";
 import { map } from "lodash";
 import moment from "moment";
 import { ModalBasic } from "../../../Common";
+import { PaymentProductList } from "../../../Admin";
 import "./TablePayments.scss";
 
 export function TablePayments(props) {
@@ -21,7 +22,7 @@ export function TablePayments(props) {
 
   const showDetails = (payment) => {
     setTitleModal(`Pedidos de la mesa ${payment.table_data.number}`);
-    setContentModal(<h2>Pedidos...</h2>);
+    setContentModal(<PaymentProductList payment={payment} />);
     openCloseModal();
   };
 
