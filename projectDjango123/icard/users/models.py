@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-
+    # pass
     # Despues se tiene que descomentar
     email = models.EmailField(unique=True)
 

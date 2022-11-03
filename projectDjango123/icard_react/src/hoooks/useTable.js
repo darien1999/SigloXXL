@@ -4,6 +4,7 @@ import {
   addTableApi,
   updateTableApi,
   deleteTableApi,
+  getTableApi
 } from "../api/table";
 import { useAuth } from "./";
 
@@ -11,6 +12,7 @@ export function useTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tables, setTables] = useState(null);
+  const [table, setTable] = useState(null);
 
   const { auth } = useAuth();
 
@@ -58,6 +60,18 @@ export function useTable() {
       setError(error);
     }
   };
+
+  const getTable = async (idTable) => {
+    try {
+      setLoading(true);
+      const response = await getTableApi(idTable);
+      setLoading(false);
+      setTable(response);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
   return {
     loading,
     error,
@@ -66,5 +80,6 @@ export function useTable() {
     addTable,
     updateTable,
     deleteTable,
+    getTable,
   };
 }
