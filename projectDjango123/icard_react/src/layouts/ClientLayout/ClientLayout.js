@@ -1,13 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Button, Container, Icon} from "semantic-ui-react";
+import { useParams, useHistory, Link } from "react-router-dom";
+import { useTable } from "../../hoooks";
 import "./ClientLayout.scss";
 
 export function ClientLayout(props) {
     const { children } = props;
-  return (
-    <div>
-        <p>ClientLayout</p>
+    const { isExistTable } = useTable ();
+    const { tableNumber } = useParams ();
+    const history = useHistory();
+   
+    useEffect(() => {
+      (async () =>  {
+        const exist = await isExistTable(tableNumber);
+        if (!exist) closeTable();
+      }) ()
+    }, [tableNumber]);
 
-        {children}
+    const closeTable = () => {
+      history. push("/")
+    }
+    
+    const goToCart = () => {
+      history.push(`/client/${tableNumber}/cart`)
+    }
+    const goToOrders = () => {
+      history.push(`/client/${tableNumber}/orders`)
+    }
+
+  return (
+    <div className="client-layout-bg">
+        <Container className="client-layout">
+          <div className="clinet-layout__header">
+            <Link to ={`/client/${tableNumber}`}>
+              <h1>Siglo XXI</h1>
+            </Link>
+            <span>Mesa {tableNumber}</span>
+
+            <div>
+              <Button icon onClick={goToCart}>
+                <Icon name="shop"/>
+              </Button>
+              <Button icon onClick={goToOrders}>
+                <Icon name="list"/>
+              </Button>
+              <Button icon onClick={closeTable}>
+                <Icon name="sign-out"/>
+              </Button>
+            </div>
+          </div>
+          <div className="client-layout__content"> {children}</div>
+        </Container>
+
+       
     </div>
   );
 }
