@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProduct } from "../../hoooks";
+import { ListProducts } from "../../components/Client";
 
 export function Products() {
   const { tableNumber, idCategory } = useParams();
@@ -12,7 +13,7 @@ export function Products() {
     <div>
       <Link to={`/client/${tableNumber}`}>Volver a categorias</Link>
 
-      {loading ? <p>Cargando...</p> : <p>Lista de productos</p>}
+      {loading ? <p>Cargando...</p> : <ListProducts products={products} />}
     </div>
   );
 }
