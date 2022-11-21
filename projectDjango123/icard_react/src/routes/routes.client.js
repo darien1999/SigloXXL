@@ -1,5 +1,5 @@
 import { ClientLayout, BasicLayout } from "../layouts";
-import { SelectTable } from "../pages/Client";
+import { SelectTable, Categories} from "../pages/Client";
 
 const routesClient = [
   {
@@ -8,6 +8,12 @@ const routesClient = [
     component: SelectTable,
     exact: true,
   },
+  {
+    path: "/client/:tableNumber",
+    layout: ClientLayout,
+    component: Categories,
+    exact : true,
+  }
 ];
 
 export default routesClient;
