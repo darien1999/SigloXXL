@@ -4,9 +4,11 @@ import { Link, useParams } from "react-router-dom"
 import {size} from "lodash";
 import { useProduct } from "../../hoooks";
 import { getProductsCart } from "../../api/cart";
+import { ListProductCart } from "../../components/Client"
 
 export function Cart() {
     const [products, setProducts] = useState(null)
+    const [reloadCart, setReloadCart] = useState(false)
     const { getProductById } = useProduct();
     const {tableNumber} = useParams();
     
@@ -22,8 +24,9 @@ export function Cart() {
         setProducts(productsArray)
 
       }) ();
-    }, []);
+    }, [reloadCart]);
     
+    const onReloadCart = () => setReloadCart((prev) => !prev);
 
 
   return (
@@ -39,7 +42,7 @@ export function Cart() {
           </Link>
           </div>
       ) : (
-        <p> Lista de productos en el carrito</p>
+        <ListProductCart products = {products} onReloadCart={onReloadCart}/>
       )
       }
     </div>
