@@ -4,7 +4,7 @@ export async function getOrdersByTableApi(idTable, status = "", ordering = "") {
   try {
     const tableFilter = `table=${idTable}`;
     const statusFilter = `status=${status}`;
-    const closeFilter = `close=False`;
+    const closeFilter = "close=False";
 
     const url = `${BASE_API}/api/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}`;
     const response = await fetch(url);
@@ -14,6 +14,7 @@ export async function getOrdersByTableApi(idTable, status = "", ordering = "") {
     throw error;
   }
 }
+
 export async function checkDeliveredOrderApi(id) {
   try {
     const url = `${BASE_API}/api/orders/${id}/`;

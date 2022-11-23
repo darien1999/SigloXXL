@@ -49,6 +49,7 @@ export function useOrder() {
       setError(error);
     }
   };
+
   const closeOrder = async (idOrder) => {
     try {
       await closeOrderApi(idOrder);

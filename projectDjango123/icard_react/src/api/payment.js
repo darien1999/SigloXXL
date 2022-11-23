@@ -18,6 +18,7 @@ export async function createPaymentApi(paymentData) {
     throw error;
   }
 }
+
 export async function getPaymentByTableApi(idTable) {
   try {
     const tableFilter = `table=${idTable}`;

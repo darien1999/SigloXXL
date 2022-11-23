@@ -18,6 +18,7 @@ export function usePayment() {
       setError(error);
     }
   };
+
   const getPaymentByTable = async (idTable) => {
     try {
       return await getPaymentByTableApi(idTable);
@@ -45,6 +46,7 @@ export function usePayment() {
       setError(error);
     }
   };
+
   return {
     error,
     loading,
